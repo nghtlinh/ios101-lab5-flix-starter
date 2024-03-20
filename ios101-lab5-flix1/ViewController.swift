@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITableViewDataSource {
 
         // Return the cell for use in the respective table view row
         return cell
+        
     }
     
 
