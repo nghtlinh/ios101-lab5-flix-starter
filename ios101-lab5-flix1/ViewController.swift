@@ -9,22 +9,29 @@ import Nuke
 // TODO: Add table view data source conformance
 class ViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        print("🍏 numberOfRowsInSection called with movies count: \(movies.count)")
+        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Create the cell
-        let cell = UITableViewCell()
+        // Create, configure, and return a table view cell for the given row (i.e., `indexPath.row`)
 
-        // Configure the cell (i.e. update UI elements like labels, image views, etc.)
-        // Get the row where the cell will be placed using the `row` property on the passed in `indexPath` (i.e., `indexPath.row`)
-        cell.textLabel?.text = "Row \(indexPath.row)"
+            // Create the cell
+            let cell = UITableViewCell()
 
-        // Return the cell for use in the respective table view row
-        return cell
+            // Get the movie-associated table view row
+            let movie = movies[indexPath.row]
+
+            // Configure the cell (i.e., update UI elements like labels, image views, etc.)
+            cell.textLabel?.text = movie.title
+        
+            print("🍏 cellForRowAt called for row: \(indexPath.row)")
+            // Return the cell for use in the respective table view row
+            return cell
         
     }
     
+    private var movies: [Movie] = []
 
 
     // TODO: Add table view outlet
@@ -93,9 +100,13 @@ class ViewController: UIViewController, UITableViewDataSource {
                         print("Title: \(movie.title)")
                         print("Overview: \(movie.overview)")
                     }
+                    
+                    print("🍏 Fetched and stored \(movies.count) movies")
 
                     // TODO: Store movies in the `movies` property on the view controller
-
+                    self?.movies = movies
+                    
+                    self?.tableView.reloadData()
 
 
                 }
